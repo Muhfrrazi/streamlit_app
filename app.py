@@ -69,11 +69,11 @@ def main():
         elif sentiment == "neutral":
             st.markdown('<div style="background-color: #FDFD96; padding: 10px; color: black;">Sentiment: neutral</div>', unsafe_allow_html=True)
 
-
 if __name__ == '__main__':
-    # Register the custom objects using custom_object_scope
-    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFAutoModelForSequenceClassification}):
-        # Load the saved model
-        model = TFAutoModelForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
+    # Mendaftarkan objek kustom menggunakan custom_object_scope
+    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFBertForSequenceClassification}):
+        # Memuat model yang telah disimpan
+        model_path = 'muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia'
+        model = keras.models.load_model(model_path)
 
         main()
