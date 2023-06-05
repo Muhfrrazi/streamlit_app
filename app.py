@@ -5,7 +5,7 @@ import transformers
 from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 import re
 import string
-import tweet_preprocessor as tp
+import preprocessor as p
 from tensorflow import keras
 
 # Load tokenizer
@@ -35,7 +35,7 @@ def preprocess_data(data):
 def text_preprocess(sentence):
     pattern = r'[0-9]'
     for punctuation in string.punctuation:
-        sentence = tp.clean(sentence)
+        sentence = p.clean(sentence)
         sentence = re.sub(r'[^a-zA-Z0-9\s]', '', sentence)
         sentence = re.sub(r'http[s]?://\S+', '', sentence)
         sentence = sentence.replace(punctuation, '')
