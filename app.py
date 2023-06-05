@@ -2,14 +2,13 @@ import streamlit as st
 import numpy as np
 import transformers
 from transformers import BertTokenizer, TFBertForSequenceClassification
-
 import re
 import string
 import preprocessor as p
+from tensorflow import keras
 
-# Load tokenizer and model
-tokenizer = BertTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
-model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+# Load tokenizer
+tokenizer = BertTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysis_Dataset-Indonesia")
 
 # Define the maximum sequence length
 max_seq = 110
@@ -71,4 +70,9 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    # Mendaftarkan objek kustom menggunakan custom_object_scope
+    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': TFBertForSequenceClassification}):
+        # Memuat model yang telah disimpan
+        model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysis_Dataset-Indonesia", num_labels=3)
+
+        main()
