@@ -1,8 +1,6 @@
 import streamlit as st
-import tensorflow as tf
 import numpy as np
-import transformers
-from transformers import BertTokenizer, TFBertModel, TFBertForSequenceClassification
+from transformers import BertTokenizer, TFBertForSequenceClassification
 import re
 import string
 import preprocessor as p
@@ -58,23 +56,20 @@ def predict_sentiment(sentence):
 # Streamlit app
 def main():
     st.title("Analisis Sentimen Berbahasa Indonesia")
-    sentence = st.text_input("Masukkan teks disini:")
+    sentence = st.text_input("Masukkan teks di sini:")
     if st.button("Cek Kalimat"):
         st.write("Hasil Klasifikasi:")
         sentiment = predict_sentiment(sentence)
         if sentiment == "positive":
-            st.markdown('<div style="background-color: green; padding: 10px; color:white;">Sentiment: positive</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: green; padding: 10px; color:white;">Sentimen: positif</div>', unsafe_allow_html=True)
         elif sentiment == "negative":
-            st.markdown('<div style="background-color: #FE4365; padding: 10px; color:white;">Sentiment: negative</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: #FE4365; padding: 10px; color:white;">Sentimen: negatif</div>', unsafe_allow_html=True)
         elif sentiment == "neutral":
-            st.markdown('<div style="background-color: #FDFD96; padding: 10px; color: black;">Sentiment: neutral</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: #FDFD96; padding: 10px; color: black;">Sentimen: netral</div>', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
-    # Mendaftarkan objek kustom menggunakan custom_object_scope
-    with keras.utils.custom_object_scope({'TFBertModel': TFBertModel, 'TFBertForSequenceClassification': TFBertForSequenceClassification}):
-        # Memuat model yang telah disimpan
-        model_path = 'muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia'
-        model = keras.models.load_model(model_path)
+    # Load your trained model from Hugging Face model hub
+    model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
-        main()
+    main()
