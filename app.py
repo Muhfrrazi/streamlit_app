@@ -12,7 +12,7 @@ from tensorflow import keras
 tokenizer = BertTokenizer.from_pretrained("indolem/indobert-base-uncased")
 
 # Define the maximum sequence length
-max_seq = 38
+max_seq = 110
 
 # Load the pre-trained model
 model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
