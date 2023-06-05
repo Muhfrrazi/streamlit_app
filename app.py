@@ -1,6 +1,8 @@
 import streamlit as st
+import tensorflow as tf
 import numpy as np
-from transformers import BertTokenizer, TFBertForSequenceClassification
+import transformers
+from transformers import BertTokenizer, TFBertModel, TFBertForSequenceClassification
 import re
 import string
 import preprocessor as p
