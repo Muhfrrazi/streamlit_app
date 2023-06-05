@@ -1,21 +1,18 @@
 import streamlit as st
-import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import AutoTokenizer, TFAutoModelForSequenceClassification, BertTokenizer
+from transformers import BertTokenizer, TFBertForSequenceClassification
+
 import re
 import string
 import preprocessor as p
-from tensorflow import keras
 
-# Load tokenizer
-tokenizer = BertTokenizer.from_pretrained("indolem/indobert-base-uncased")
+# Load tokenizer and model
+tokenizer = BertTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
 # Define the maximum sequence length
 max_seq = 110
-
-# Load the pre-trained model
-model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
 # Function to preprocess the data
 def preprocess_data(data):
