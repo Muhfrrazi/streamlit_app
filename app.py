@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from transformers import BertTokenizer, TFAutoModelForSequenceClassification
+from transformers import BertTokenizer, TFBertForSequenceClassification
 import re
 import string
 import preprocessor as p
@@ -69,7 +69,7 @@ def main():
 
 
 if __name__ == '__main__':
-    # Load the model from Hugging Face model hub
-    model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+    # Load your trained model from Hugging Face model hub
+    model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
     main()
