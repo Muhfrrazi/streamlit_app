@@ -49,8 +49,8 @@ def text_preprocess(sentence):
 def predict_sentiment(sentence):
     preprocessed_sentence = preprocess_data(np.array([sentence]))
     input_ids, attention_mask = preprocessed_sentence[0]
-    prediction = model([input_ids, attention_mask])
-    predicted_label = np.argmax(prediction.logits)
+    prediction = model.predict([input_ids, attention_mask])
+    predicted_label = np.argmax(prediction)
     label_mapping = {0: "negative", 1: "neutral", 2: "positive"}
     predicted_label = label_mapping[predicted_label]
     return predicted_label
