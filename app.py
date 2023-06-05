@@ -14,6 +14,9 @@ tokenizer = BertTokenizer.from_pretrained("indolem/indobert-base-uncased")
 # Define the maximum sequence length
 max_seq = 38
 
+# Load the pre-trained model
+model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+
 # Function to preprocess the data
 def preprocess_data(data):
     data = data.tolist()  # Convert numpy array to list
@@ -71,10 +74,4 @@ def main():
 
 
 if __name__ == '__main__':
-    # Register the custom objects using custom_object_scope
-    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFAutoModelForSequenceClassification}):
-        # Memuat model yang telah disimpan
-        model_path= TFAutoModelForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
-        model = keras.models.load_model(model_path)
-
-        main()
+    main()
