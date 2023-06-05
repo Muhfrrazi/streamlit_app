@@ -2,14 +2,14 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import BertTokenizer, TFBertModel, TFBertForSequenceClassification
+from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 import re
 import string
 import preprocessor as p
 from tensorflow import keras
 
 # Load tokenizer
-tokenizer = BertTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+tokenizer = AutoTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
 # Define the maximum sequence length
 max_seq = 110
@@ -72,6 +72,6 @@ def main():
 
 if __name__ == '__main__':
     # Load your trained model from Hugging Face model hub
-    model = TFBertForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+    model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
 
     main()
