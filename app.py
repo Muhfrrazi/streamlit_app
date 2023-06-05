@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import AutoTokenizer,TFBertForSequenceClassification
+from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 import re
 import string
 import preprocessor as p
@@ -49,8 +49,8 @@ def text_preprocess(sentence):
 def predict_sentiment(sentence):
     preprocessed_sentence = preprocess_data(np.array([sentence]))
     input_ids, attention_mask = preprocessed_sentence[0]
-    prediction = model.predict([input_ids, attention_mask])
-    predicted_label = np.argmax(prediction)
+    prediction = model([input_ids, attention_mask])
+    predicted_label = np.argmax(prediction.logits)
     label_mapping = {0: "negative", 1: "neutral", 2: "positive"}
     predicted_label = label_mapping[predicted_label]
     return predicted_label
@@ -72,8 +72,8 @@ def main():
 
 if __name__ == '__main__':
     # Register the custom objects using custom_object_scope
-    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFBertForSequenceClassification}):
+    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFAutoModelForSequenceClassification}):
         # Load the saved model
-        model = TFBertForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
+        model = TFAutoModelForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
 
         main()
