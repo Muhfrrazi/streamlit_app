@@ -9,7 +9,7 @@ import preprocessor as p
 from tensorflow import keras
 
 # Menginisialisasi model dan tokenizer dari Hugging Face
-model_name = "indolem/indobert-base-uncased"
+model_name = "muhfrrazi/Sentiment_Analysist-IndoBERT-using-indonesia-dataset"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = TFAutoModelForSequenceClassification.from_pretrained(model_name)
 
