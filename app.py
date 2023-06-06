@@ -9,7 +9,7 @@ import preprocessor as p
 from tensorflow import keras
 
 # Load tokenizer
-tokenizer = AutoTokenizer.from_pretrained("indolem/indobert-base-uncased")
+tokenizer = AutoTokenizer.from_pretrained("muhfrrazi/Sentiment_Analysist-IndoBERT-using-indonesia-dataset")
 
 # Define the maximum sequence length
 max_seq = 110
@@ -74,6 +74,6 @@ if __name__ == '__main__':
     # Register the custom objects using custom_object_scope
     with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFBertForSequenceClassification}):
         # Load the saved model
-        model = TFBertForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
+        model = TFBertForSequenceClassification.from_pretrained('muhfrrazi/Sentiment_Analysist-IndoBERT-using-indonesia-dataset')
 
         main()
