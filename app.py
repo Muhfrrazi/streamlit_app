@@ -2,7 +2,7 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import AutoTokenizer,TFBertForSequenceClassification
+from transformers import BertTokenizer, TFBertForSequenceClassification
 import re
 import string
 import preprocessor as p
