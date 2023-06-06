@@ -2,14 +2,14 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
+from transformers import AutoTokenizer,TFBertForSequenceClassification
 import re
 import string
 import preprocessor as p
 from tensorflow import keras
 
 # Load tokenizer
-tokenizer = AutoTokenizer.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+tokenizer = AutoTokenizer.from_pretrained("indolem/indobert-base-uncased")
 
 # Define the maximum sequence length
 max_seq = 110
@@ -58,20 +58,22 @@ def predict_sentiment(sentence):
 # Streamlit app
 def main():
     st.title("Analisis Sentimen Berbahasa Indonesia")
-    sentence = st.text_input("Masukkan teks di sini:")
+    sentence = st.text_input("Masukkan teks disini:")
     if st.button("Cek Kalimat"):
         st.write("Hasil Klasifikasi:")
         sentiment = predict_sentiment(sentence)
         if sentiment == "positive":
-            st.markdown('<div style="background-color: green; padding: 10px; color:white;">Sentimen: positif</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: green; padding: 10px; color:white;">Sentiment: positive</div>', unsafe_allow_html=True)
         elif sentiment == "negative":
-            st.markdown('<div style="background-color: #FE4365; padding: 10px; color:white;">Sentimen: negatif</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: #FE4365; padding: 10px; color:white;">Sentiment: negative</div>', unsafe_allow_html=True)
         elif sentiment == "neutral":
-            st.markdown('<div style="background-color: #FDFD96; padding: 10px; color: black;">Sentimen: netral</div>', unsafe_allow_html=True)
+            st.markdown('<div style="background-color: #FDFD96; padding: 10px; color: black;">Sentiment: neutral</div>', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
-    # Load your trained model from Hugging Face model hub
-    model = TFAutoModelForSequenceClassification.from_pretrained("muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia")
+    # Register the custom objects using custom_object_scope
+    with keras.utils.custom_object_scope({'TFBertForSequenceClassification': transformers.TFBertForSequenceClassification}):
+        # Load the saved model
+        model = TFBertForSequenceClassification.from_pretrained('muhfrrazi/IndoBERT-Sentiment-Analysist_Dataset-Indonesia')
 
-    main()
+        main()
