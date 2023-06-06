@@ -2,15 +2,16 @@ import streamlit as st
 import tensorflow as tf
 import numpy as np
 import transformers
-from transformers import BertTokenizer, TFBertForSequenceClassification
+from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
 import re
 import string
 import preprocessor as p
 from tensorflow import keras
 
-# Load tokenizer
-tokenizer = BertTokenizer.from_pretrained("indolem/indobert-base-uncased")
-model = TFBertForSequenceClassification.from_pretrained('muhfrrazi/Sentiment_Analysist-IndoBERT-using-indonesia-dataset')
+# Menginisialisasi model dan tokenizer dari Hugging Face
+model_name = "indolem/indobert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = TFAutoModelForSequenceClassification.from_pretrained(model_name)
 
 # Define the maximum sequence length
 max_seq = 110
