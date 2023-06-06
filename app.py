@@ -9,7 +9,7 @@ import preprocessor as p
 from tensorflow import keras
 
 # Load tokenizer
-tokenizer = AutoTokenizer.from_pretrained("muhfrrazi/Sentiment_Analysist-IndoBERT-using-indonesia-dataset")
+tokenizer = BertTokenizer.from_pretrained("indolem/indobert-base-uncased")
 
 # Define the maximum sequence length
 max_seq = 110
